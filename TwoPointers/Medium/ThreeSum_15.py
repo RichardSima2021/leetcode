@@ -1,4 +1,4 @@
-def threeSum(nums):
+def threeSumBruteForce(nums):
     # a + b + c == 0
     # b + c == 0 - a
     triplets = set()
@@ -23,5 +23,42 @@ def threeSum(nums):
 
     return triplet_list
 
-print(threeSum([-1,0,1,2,-1,-4]))
+
+
+def threeSumOptimal(nums):
+    def twoSumSorted(nums, target):
+        pairs = set()
+        left = 0
+        right = len(nums) - 1
+        while left < right:
+            b = nums[left]
+            c = nums[right]
+            if b + c == target:
+                pairs.add((b,c))
+                left += 1
+            else:
+                if b + c < target:
+                    left += 1
+                else:
+                    right -= 1
+        return pairs
+
+    triplets = []
+    nums.sort()
+    for i in range(len(nums) - 2):
+        if i != 0:
+            if nums[i] == nums[i-1]:
+                continue
+        a = nums[i]
+        for pair in twoSumSorted(nums[i+1:], -1 * a):
+            b, c = pair
+            triplets.append([a,b,c])
+
+    return triplets
+
+
+
+if __name__ == '__main__':
+    # print(threeSumBruteForce([-6,0,1,2,-1,-4]))
+    print(threeSumOptimal([0,0,0]))
 
