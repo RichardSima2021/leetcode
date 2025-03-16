@@ -25,6 +25,29 @@ def removeDuplicates_bruteForce(nums):
 
     return k
 
+def removeDuplicates(nums):
+    # slot is where the next unique value would be slotted into
+    # we keep going until we find the next unique value, put it in slot, and move the slot up by 1
+    # we're not overwriting anything that needs to be preserved
+    seen = set()
+    uniques = set()
+    slot = 0
+    for num in nums:
+        uniques.add(num)
+    k = len(uniques)
+    for i in range(len(nums)):
+        if slot > k:
+            return k
+
+        curr = nums[i]
+        if curr not in seen:
+            seen.add(curr)
+            nums[slot] = curr
+            slot += 1
+
+    return k
+
 arr = [0,0,1,1,1,2,2,3,3,4]
-removeDuplicates_bruteForce(arr)
+# removeDuplicates_bruteForce(arr)
+removeDuplicates(arr)
 print(arr)
