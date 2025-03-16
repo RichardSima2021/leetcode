@@ -1,4 +1,4 @@
-def check(self, nums: List[int]) -> bool:
+def check(nums: List[int]) -> bool:
     # 0 value drops: array is sorted
     # 1 value drop: array is sorted and rotated - the value at the drop must be largest value seen
     # 2+ value drops: array is not sorted and rotated
